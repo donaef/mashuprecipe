@@ -10,6 +10,10 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
+import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -19,8 +23,7 @@ import java.util.ArrayList;
  * @author  Dominik Näf
  * @version 19.01.2019
  */
-public class App extends Application
-{
+public class App extends Application {
 
     Stage window;
     Scene sceneHome, sceneCategories, sceneMeal;
@@ -77,7 +80,7 @@ public class App extends Application
             root.getChildren().addAll(test, imgView);
         }
 
-        sceneHome = new Scene(root, 800, 700);
+        sceneHome = new Scene(root, 800, 900);
 
         window.setTitle("MashUpRecipe - Dominik Näf");
         window.setScene(sceneHome);
@@ -144,16 +147,9 @@ public class App extends Application
             rootCategories.getChildren().addAll(test, imgView);
         }
 
-        sceneCategories = new Scene(rootCategories, 800, 700);
+        sceneCategories = new Scene(rootCategories, 800, 900);
         window.setScene(sceneCategories);
     }
-
-
-
-
-
-
-
 
     public void showMeal() {
 
@@ -163,6 +159,9 @@ public class App extends Application
 
         StackPane rootMeal = new StackPane();
         rootMeal.setAlignment(Pos.TOP_CENTER);
+
+        API api = new API();
+        final ArrayList<Meal> resultsCategory = api.showMeal(mealChoosen);
 
         Button btnCategories = new Button();
         btnCategories.setText("<");
@@ -179,42 +178,104 @@ public class App extends Application
         });
         rootMeal.getChildren().add(btnCategories);
 
-        /*
+        Button btnYouTube = new Button();
+        btnYouTube.setText("YouTube");
+        btnYouTube.setTranslateX(200);
+        btnYouTube.setPrefWidth(100);
+        btnYouTube.setOnAction(new EventHandler<ActionEvent>() {
 
-        API api = new API();
-        ArrayList<Meal> resultsCategory = api.filterByCategory(categoryChoosen);
+            public void handle(ActionEvent event) {
+
+                Stage windowYouTube = new Stage();
+                WebView webView = new WebView();
+                webView.getEngine().load(resultsCategory.get(0).getStrYoutTube());
+                webView.setPrefSize(640, 390);
+                windowYouTube.setScene(new Scene(webView));
+                windowYouTube.show();
+
+            }
+
+        });
+        rootMeal.getChildren().add(btnYouTube);
+
+        Button btnList = new Button();
+        btnList.setText("Incredients");
+        btnList.setTranslateX(200);
+        btnList.setTranslateY(35);
+        btnList.setPrefWidth(100);
+        btnList.setOnAction(new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+
+                Stage windowIncredients = new Stage();
+                StackPane rootList = new StackPane();
+                rootList.setAlignment(Pos.TOP_CENTER);
+
+                ArrayList<String> incredients = resultsCategory.get(0).getIntegredients();
+                ArrayList<String> measures = resultsCategory.get(0).getMeasures();
+
+                int cordinateIncredient = 10;
+                int cordinateMeasure = 10;
+                for (String incredient : incredients) {
+                    Label incredient1 = new Label();
+                    incredient1.setAlignment(Pos.CENTER);
+                    incredient1.setText(incredient);
+                    incredient1.setTranslateY(cordinateIncredient);
+                    incredient1.setTranslateX(-50);
+                    incredient1.setPrefWidth(150);
+                    incredient1.wrapTextProperty().setValue(true);
+                    cordinateIncredient += 20;
+                    rootList.getChildren().add(incredient1);
+                }
+
+                for (String measure : measures) {
+                    Label measure1 = new Label();
+                    measure1.setAlignment(Pos.CENTER);
+                    measure1.setText(measure);
+                    measure1.setTranslateY(cordinateMeasure);
+                    measure1.setTranslateX(50);
+                    measure1.setPrefWidth(150);
+                    measure1.wrapTextProperty().setValue(true);
+                    cordinateMeasure += 20;
+                    rootList.getChildren().add(measure1);
+                }
+
+                windowIncredients.setScene(new Scene(rootList, 400, 500));
+                windowIncredients.show();
+
+            }
+
+        });
+        rootMeal.getChildren().add(btnList);
+
         int cordinateXCategory = 0;
         int cordinateYCategory = 40;
-        for (final Meal meal : resultsCategory) {
 
-            Image img = new Image(meal.getStrMealThumb());
-            ImageView imgView = new ImageView(img);
-            imgView.setTranslateX(-250);
-            imgView.setTranslateY(cordinateYCategory-5);
-            imgView.setFitHeight(50);
-            imgView.setFitWidth(50);
+        Image img = new Image(resultsCategory.get(0).getStrMealThumb());
+        ImageView imgView = new ImageView(img);
+        imgView.setTranslateX(-250);
+        imgView.setTranslateY(cordinateYCategory-5);
+        imgView.setFitHeight(50);
+        imgView.setFitWidth(50);
 
-            Button test = new Button();
-            test.wrapTextProperty().setValue(true);
-            test.setText(meal.getStrMeal());
-            //image
-            test.setTranslateX(cordinateXCategory);
-            test.setTranslateY(cordinateYCategory);
-            test.setPrefWidth(400);
-            test.setOnAction(new EventHandler<ActionEvent>() {
-                public void handle(ActionEvent event) {
-                    mealChoosen = meal.getIdMeal();
-                    showMeal();
-                }
-            });
-            cordinateYCategory += 50;
-            rootCategories.getChildren().addAll(test, imgView);
-        }
+        Label title = new Label();
+        title.setText(resultsCategory.get(0).getStrMeal());
+        title.setAlignment(Pos.CENTER);
+        title.setTranslateY(cordinateYCategory);
+        cordinateYCategory += 50;
 
-    */
+        Label introductions = new Label();
+        introductions.setText(resultsCategory.get(0).getStrInstructions());
+        introductions.setAlignment(Pos.CENTER);
+        introductions.setTranslateY(cordinateYCategory);
+        introductions.setPrefWidth(700);
+        introductions.wrapTextProperty().setValue(true);
 
-        sceneMeal = new Scene(rootMeal, 800, 700);
+        rootMeal.getChildren().addAll(title, introductions, imgView);
+
+        sceneMeal = new Scene(rootMeal, 800, 900);
         window.setScene(sceneMeal);
+
     }
 
 }

@@ -9,6 +9,11 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.ArrayList;
 
+/**
+ * MashUpRecipe
+ * @author  Dominik Näf
+ * @version 19.01.2019
+ */
 public class API {
 
     public API() {}
@@ -101,17 +106,6 @@ public class API {
 
     }
 
-
-
-
-
-
-
-
-
-
-
-
     public ArrayList<Meal> showMeal(String mealChoosen) {
 
         ArrayList<Meal> returnList = new ArrayList<Meal>();
@@ -141,9 +135,59 @@ public class API {
 
                 JSONObject jsonMealsInstance = meals.getJSONObject(i);
                 Meal mealTemp = new Meal();
-                mealTemp.setIdMeal(jsonMealsInstance.getString("idMeal"));
                 mealTemp.setStrMeal(jsonMealsInstance.getString("strMeal"));
                 mealTemp.setStrMealThumb(jsonMealsInstance.getString("strMealThumb"));
+                mealTemp.setStrInstructions(jsonMealsInstance.getString("strInstructions"));
+                mealTemp.setStrYoutTube(jsonMealsInstance.getString("strYoutube"));
+
+                ArrayList<String> ingredients = new ArrayList<String>();
+                ArrayList<String> measures = new ArrayList<String>();
+
+                ingredients.add(jsonMealsInstance.getString("strIngredient1"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient2"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient3"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient4"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient5"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient6"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient7"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient8"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient9"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient10"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient11"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient12"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient13"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient14"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient15"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient16"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient17"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient18"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient19"));
+                ingredients.add(jsonMealsInstance.getString("strIngredient20"));
+
+                measures.add(jsonMealsInstance.getString("strMeasure1"));
+                measures.add(jsonMealsInstance.getString("strMeasure2"));
+                measures.add(jsonMealsInstance.getString("strMeasure3"));
+                measures.add(jsonMealsInstance.getString("strMeasure4"));
+                measures.add(jsonMealsInstance.getString("strMeasure5"));
+                measures.add(jsonMealsInstance.getString("strMeasure6"));
+                measures.add(jsonMealsInstance.getString("strMeasure7"));
+                measures.add(jsonMealsInstance.getString("strMeasure8"));
+                measures.add(jsonMealsInstance.getString("strMeasure9"));
+                measures.add(jsonMealsInstance.getString("strMeasure10"));
+                measures.add(jsonMealsInstance.getString("strMeasure11"));
+                measures.add(jsonMealsInstance.getString("strMeasure12"));
+                measures.add(jsonMealsInstance.getString("strMeasure13"));
+                measures.add(jsonMealsInstance.getString("strMeasure14"));
+                measures.add(jsonMealsInstance.getString("strMeasure15"));
+                measures.add(jsonMealsInstance.getString("strMeasure16"));
+                measures.add(jsonMealsInstance.getString("strMeasure17"));
+                measures.add(jsonMealsInstance.getString("strMeasure18"));
+                measures.add(jsonMealsInstance.getString("strMeasure19"));
+                measures.add(jsonMealsInstance.getString("strMeasure20"));
+
+                mealTemp.setIntegredients(ingredients);
+                mealTemp.setMeasures(measures);
+
                 returnList.add(mealTemp);
 
             }

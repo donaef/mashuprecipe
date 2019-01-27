@@ -1,5 +1,10 @@
 package ch.bbw.dn.mashuprecipe;
 
+/**
+ * MashUpRecipe
+ * @author  Dominik Näf
+ * @version 19.01.2019
+ */
 public class Category {
 
     private String idCategory;

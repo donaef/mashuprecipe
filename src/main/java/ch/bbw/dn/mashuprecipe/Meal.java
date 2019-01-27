@@ -1,61 +1,45 @@
 package ch.bbw.dn.mashuprecipe;
 
+import java.util.ArrayList;
+
+/**
+ * MashUpRecipe
+ * @author  Dominik Näf
+ * @version 19.01.2019
+ */
 public class Meal {
 
     private String strMeal;
     private String strMealThumb;
     private String idMeal;
-
     private String strCategory;
     private String strArea;
     private String strInstructions;
     private String strTags;
     private String strYoutTube;
-    private String strIngredient1;
-    private String strIngredient2;
-    private String strIngredient3;
-    private String strIngredient4;
-    private String strIngredient5;
-    private String strIngredient6;
-    private String strIngredient7;
-    private String strIngredient8;
-    private String strIngredient9;
-    private String strIngredient10;
-    private String strIngredient11;
-    private String strIngredient12;
-    private String strIngredient13;
-    private String strIngredient14;
-    private String strIngredient15;
-    private String strIngredient16;
-    private String strIngredient17;
-    private String strIngredient18;
-    private String strIngredient19;
-    private String strIngredient20;
-    private String strMeasure1;
-    private String strMeasure2;
-    private String strMeasure3;
-    private String strMeasure4;
-    private String strMeasure5;
-    private String strMeasure6;
-    private String strMeasure7;
-    private String strMeasure8;
-    private String strMeasure9;
-    private String strMeasure10;
-    private String strMeasure11;
-    private String strMeasure12;
-    private String strMeasure13;
-    private String strMeasure14;
-    private String strMeasure15;
-    private String strMeasure16;
-    private String strMeasure17;
-    private String strMeasure18;
-    private String strMeasure19;
-    private String strMeasure20;
     private String strSource;
     private String dateModified;
+    private ArrayList<String> integredients = new ArrayList<String>();
+    private ArrayList<String> measures = new ArrayList<String>();
 
 
     public Meal() {};
+
+    public ArrayList<String> getIntegredients() {
+        return integredients;
+    }
+
+    public void setIntegredients(ArrayList<String> integredients) {
+        this.integredients = integredients;
+    }
+
+    public ArrayList<String> getMeasures() {
+        return measures;
+    }
+
+    public void setMeasures(ArrayList<String> measures) {
+        this.measures = measures;
+    }
 
     public String getStrMeal() {
         return strMeal;
@@ -79,6 +63,62 @@ public class Meal {
 
     public void setIdMeal(String idMeal) {
         this.idMeal = idMeal;
+    }
+
+    public String getStrCategory() {
+        return strCategory;
+    }
+
+    public void setStrCategory(String strCategory) {
+        this.strCategory = strCategory;
+    }
+
+    public String getStrArea() {
+        return strArea;
+    }
+
+    public void setStrArea(String strArea) {
+        this.strArea = strArea;
+    }
+
+    public String getStrInstructions() {
+        return strInstructions;
+    }
+
+    public void setStrInstructions(String strInstructions) {
+        this.strInstructions = strInstructions;
+    }
+
+    public String getStrTags() {
+        return strTags;
+    }
+
+    public void setStrTags(String strTags) {
+        this.strTags = strTags;
+    }
+
+    public String getStrYoutTube() {
+        return strYoutTube;
+    }
+
+    public void setStrYoutTube(String strYoutTube) {
+        this.strYoutTube = strYoutTube;
+    }
+
+    public String getStrSource() {
+        return strSource;
+    }
+
+    public void setStrSource(String strSource) {
+        this.strSource = strSource;
+    }
+
+    public String getDateModified() {
+        return dateModified;
+    }
+
+    public void setDateModified(String dateModified) {
+        this.dateModified = dateModified;
     }
 
 }
