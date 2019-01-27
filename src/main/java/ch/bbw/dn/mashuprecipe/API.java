@@ -62,7 +62,7 @@ public class API {
 
     }
 
-    public ArrayList<Meal> filterByCategory(String categoryChoosen) {
+    public ArrayList<Meal> getMealsFilteredByCategory(String categoryChoosen) {
 
         ArrayList<Meal> returnList = new ArrayList<Meal>();
 
@@ -106,7 +106,7 @@ public class API {
 
     }
 
-    public ArrayList<Meal> showMeal(String mealChoosen) {
+    public ArrayList<Meal> getMeal(String mealChoosen) {
 
         ArrayList<Meal> returnList = new ArrayList<Meal>();
 

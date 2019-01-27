@@ -22,7 +22,6 @@ public class Meal {
     private ArrayList<String> integredients = new ArrayList<String>();
     private ArrayList<String> measures = new ArrayList<String>();
 
-
     public Meal() {};
 
     public ArrayList<String> getIntegredients() {
