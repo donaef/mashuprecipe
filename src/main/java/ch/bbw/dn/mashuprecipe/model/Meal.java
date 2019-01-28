@@ -1,4 +1,4 @@
-package ch.bbw.dn.mashuprecipe;
+package ch.bbw.dn.mashuprecipe.model;
 
 import java.util.ArrayList;
 

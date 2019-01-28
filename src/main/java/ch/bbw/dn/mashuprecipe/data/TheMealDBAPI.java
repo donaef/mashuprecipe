@@ -1,5 +1,7 @@
-package ch.bbw.dn.mashuprecipe;
+package ch.bbw.dn.mashuprecipe.data;
 
+import ch.bbw.dn.mashuprecipe.model.Category;
+import ch.bbw.dn.mashuprecipe.model.Meal;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -14,9 +16,9 @@ import java.util.ArrayList;
  * @author  Dominik Näf
  * @version 19.01.2019
  */
-public class API {
+public class TheMealDBAPI {
 
-    public API() {}
+    public TheMealDBAPI() {}
 
     public ArrayList<Category> getAllCategories() {
 

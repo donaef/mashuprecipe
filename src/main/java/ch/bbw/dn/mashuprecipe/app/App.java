@@ -1,5 +1,12 @@
-package ch.bbw.dn.mashuprecipe;
+package ch.bbw.dn.mashuprecipe.app;
 
+import ch.bbw.dn.mashuprecipe.data.TheCocktailDBAPI;
+import ch.bbw.dn.mashuprecipe.data.TheMealDBAPI;
+import ch.bbw.dn.mashuprecipe.data.MySQLDatabase;
+import ch.bbw.dn.mashuprecipe.model.Category;
+import ch.bbw.dn.mashuprecipe.model.Drink;
+import ch.bbw.dn.mashuprecipe.model.List;
+import ch.bbw.dn.mashuprecipe.model.Meal;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -25,7 +32,7 @@ public class App extends Application {
     Stage window;
     Scene sceneCategories, sceneCategoryResults, sceneMeal;
     String categoryChoosen, mealChoosen;
-    API api;
+    TheMealDBAPI theMealDBAPI;
 
 	public static void main(String[] args) {
         launch(args);
@@ -34,11 +41,6 @@ public class App extends Application {
     public void start(final Stage primaryStage) {
 
 	    window = primaryStage;
-
-
-
-
-
 
         Button btnList = new Button();
         btnList.setText("Shoppinglist");
@@ -53,8 +55,8 @@ public class App extends Application {
                 StackPane rootList = new StackPane();
                 rootList.setAlignment(Pos.TOP_CENTER);
 
-                DAO dao = new DAO();
-                ArrayList<List> incredients = dao.getList();
+                MySQLDatabase mySQLDatabase = new MySQLDatabase();
+                ArrayList<List> incredients = mySQLDatabase.getList();
 
                 int cordinateIncredient = 10;
                 for (List incredient : incredients) {
@@ -91,7 +93,7 @@ public class App extends Application {
         //                  HOME
         //---------------------------------------------
 
-        api = new API();
+        theMealDBAPI = new TheMealDBAPI();
         StackPane root = new StackPane();
         root.setAlignment(Pos.TOP_CENTER);
 
@@ -100,7 +102,7 @@ public class App extends Application {
         lblTitleCategories.setTranslateY(10);
         root.getChildren().addAll(lblTitleCategories, btnList);
 
-        ArrayList<Category> results = api.getAllCategories();
+        ArrayList<Category> results = theMealDBAPI.getAllCategories();
         int cordinateY = 40;
         for (final Category category : results) {
 
@@ -164,7 +166,7 @@ public class App extends Application {
         });
         rootCategoryResults.getChildren().addAll(btnCategories, lblTitleCategories);
 
-        ArrayList<Meal> resultsCategory = api.getMealsFilteredByCategory(categoryChoosen);
+        ArrayList<Meal> resultsCategory = theMealDBAPI.getMealsFilteredByCategory(categoryChoosen);
         int cordinateYCategory = 40;
         for (final Meal meal : resultsCategory) {
 
@@ -218,7 +220,7 @@ public class App extends Application {
 
         });
 
-        final ArrayList<Meal> resultsCategory = api.getMeal(mealChoosen);
+        final ArrayList<Meal> resultsCategory = theMealDBAPI.getMeal(mealChoosen);
 
         Button btnYouTube = new Button();
         btnYouTube.setText("YouTube");
@@ -264,8 +266,8 @@ public class App extends Application {
 
                     public void handle(ActionEvent event) {
 
-                        DAO dao = new DAO();
-                        dao.addList(incredients, measures);
+                        MySQLDatabase mySQLDatabase = new MySQLDatabase();
+                        mySQLDatabase.addList(incredients, measures);
 
                     }
 
@@ -305,6 +307,94 @@ public class App extends Application {
 
         });
 
+
+
+        Button btnDrink = new Button();
+        btnDrink.setText("Random Drink");
+        btnDrink.setTranslateX(200);
+        btnDrink.setTranslateY(70);
+        btnDrink.setPrefWidth(100);
+        btnDrink.setOnAction(new EventHandler<ActionEvent>() {
+
+            public void handle(ActionEvent event) {
+
+                Stage windowDrink = new Stage();
+                StackPane rootDrink = new StackPane();
+                rootDrink.setAlignment(Pos.TOP_CENTER);
+
+                TheCocktailDBAPI drinkAPI = new TheCocktailDBAPI();
+                ArrayList<Drink> resultsDrink = drinkAPI.getRandomDrink();
+
+                Image img = new Image(resultsDrink.get(0).getStrDrinkThumb());
+                ImageView imgView = new ImageView(img);
+                imgView.setTranslateX(-100);
+                imgView.setTranslateY(30);
+                imgView.setFitHeight(50);
+                imgView.setFitWidth(50);
+
+                Label title = new Label();
+                title.setText(resultsDrink.get(0).getStrDrink());
+                title.setAlignment(Pos.CENTER);
+                title.setTranslateY(50);
+
+                Label introductions = new Label();
+                introductions.setText(resultsDrink.get(0).getStrInstructions());
+                introductions.setAlignment(Pos.CENTER);
+                introductions.setTranslateY(100);
+                introductions.setPrefWidth(300);
+                introductions.wrapTextProperty().setValue(true);
+
+                final ArrayList<String> incredients = resultsDrink.get(0).getIntegredients();
+                final ArrayList<String> measures = resultsDrink.get(0).getMeasures();
+
+                Button btnShoppingList = new Button();
+                btnShoppingList.setText("Add to Shoppinglist");
+                btnShoppingList.setPrefWidth(150);
+                btnShoppingList.setOnAction(new EventHandler<ActionEvent>() {
+
+                    public void handle(ActionEvent event) {
+
+                        MySQLDatabase mySQLDatabase = new MySQLDatabase();
+                        mySQLDatabase.addList(incredients, measures);
+
+                    }
+
+                });
+                rootDrink.getChildren().addAll(btnShoppingList, imgView, title, introductions);
+
+                int cordinateIncredient = 225;
+                int cordinateMeasure = 225;
+                for (String incredient : incredients) {
+                    Label incredient1 = new Label();
+                    incredient1.setAlignment(Pos.CENTER);
+                    incredient1.setText(incredient);
+                    incredient1.setTranslateY(cordinateIncredient);
+                    incredient1.setTranslateX(-50);
+                    incredient1.setPrefWidth(150);
+                    incredient1.wrapTextProperty().setValue(true);
+                    cordinateIncredient += 20;
+                    rootDrink.getChildren().add(incredient1);
+                }
+
+                for (String measure : measures) {
+                    Label measure1 = new Label();
+                    measure1.setAlignment(Pos.CENTER);
+                    measure1.setText(measure);
+                    measure1.setTranslateY(cordinateMeasure);
+                    measure1.setTranslateX(50);
+                    measure1.setPrefWidth(150);
+                    measure1.wrapTextProperty().setValue(true);
+                    cordinateMeasure += 20;
+                    rootDrink.getChildren().add(measure1);
+                }
+
+                windowDrink.setScene(new Scene(rootDrink, 400, 500));
+                windowDrink.show();
+
+            }
+
+        });
+
         int cordinateYCategory = 40;
 
         Image img = new Image(resultsCategory.get(0).getStrMealThumb());
@@ -318,7 +408,7 @@ public class App extends Application {
         title.setText(resultsCategory.get(0).getStrMeal());
         title.setAlignment(Pos.CENTER);
         title.setTranslateY(cordinateYCategory);
-        cordinateYCategory += 50;
+        cordinateYCategory += 100;
 
         Label introductions = new Label();
         introductions.setText(resultsCategory.get(0).getStrInstructions());
@@ -327,7 +417,7 @@ public class App extends Application {
         introductions.setPrefWidth(700);
         introductions.wrapTextProperty().setValue(true);
 
-        rootMeal.getChildren().addAll(title, introductions, imgView, btnList, btnYouTube, btnCategories);
+        rootMeal.getChildren().addAll(title, introductions, imgView, btnList, btnYouTube, btnCategories, btnDrink);
 
         sceneMeal = new Scene(rootMeal, 800, 900);
         window.setScene(sceneMeal);
