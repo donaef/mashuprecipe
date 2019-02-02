@@ -2,15 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b8c6d246-6f80-4554-8c76-154b8047e2d0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/MashUpRecipe.sql" beforeDir="false" afterPath="$PROJECT_DIR$/MashUpRecipe.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/app/App.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/app/App.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/MySQLDatabase.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/MySQLDatabase.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheCocktailDBAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheCocktailDBAPI.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheMealDBAPI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheMealDBAPI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Category.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Category.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Drink.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Drink.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/List.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/List.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Meal.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Meal.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/target/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -49,7 +44,6 @@
       <find>new scene</find>
       <find>shopping</find>
       <find>vbox</find>
-      <find>youtube</find>
       <find>random drink</find>
       <find>incredie</find>
       <find>ingre</find>
@@ -62,6 +56,7 @@
       <find>mainwindow</find>
       <find>TheCocktailDBAPI</find>
       <find>mySQLDatabase</find>
+      <find>youtube</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -88,17 +83,17 @@
         <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/App.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/List.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/app/Categorymeals.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/app/App.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/MySQLDatabase.java" />
-        <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheCocktailDBAPI.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Category.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Drink.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Meal.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/app/App.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/MySQLDatabase.java" />
+        <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheCocktailDBAPI.java" />
         <option value="$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheMealDBAPI.java" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-10" />
     <option name="y" value="-10" />
     <option name="width" value="1939" />
@@ -183,7 +178,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549128973182" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549135642806" />
     <property name="last_opened_file_path" value="D:/1 BBW/M151/_workspace/MockitoCraps" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
@@ -285,7 +280,7 @@
       <workItem from="1549003331974" duration="8512000" />
       <workItem from="1549056125680" duration="326000" />
       <workItem from="1549096901952" duration="927000" />
-      <workItem from="1549097854483" duration="6546000" />
+      <workItem from="1549097854483" duration="9333000" />
     </task>
     <task id="LOCAL-00001" summary="create develop">
       <created>1548147901303</created>
@@ -331,7 +326,7 @@
     </history-entry>
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71871000" />
+    <option name="totallyTimeSpent" value="74658000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -345,7 +340,7 @@
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" weight="0.20735608" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.20735608" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -467,84 +462,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheCocktailDBAPI.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="423">
-          <caret line="46" lean-forward="true" selection-start-line="46" selection-end-line="46" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/MySQLDatabase.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="701">
-          <caret line="111" column="28" lean-forward="true" selection-start-line="111" selection-start-column="28" selection-end-line="111" selection-end-column="28" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Category.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Drink.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="612">
-          <caret line="36" column="4" selection-start-line="36" selection-start-column="4" selection-end-line="36" selection-end-column="4" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#1058#1059#0" expanded="true" />
-            <element signature="e#1088#1089#0" expanded="true" />
-            <element signature="e#1134#1135#0" expanded="true" />
-            <element signature="e#1172#1173#0" expanded="true" />
-            <element signature="e#1207#1208#0" expanded="true" />
-            <element signature="e#1238#1239#0" expanded="true" />
-            <element signature="e#1286#1287#0" expanded="true" />
-            <element signature="e#1326#1327#0" expanded="true" />
-            <element signature="e#3058#3059#0" expanded="true" />
-            <element signature="e#3096#3097#0" expanded="true" />
-            <element signature="e#3158#3159#0" expanded="true" />
-            <element signature="e#3212#3213#0" expanded="true" />
-            <element signature="e#4352#4353#0" expanded="true" />
-            <element signature="e#4388#4389#0" expanded="true" />
-            <element signature="e#4446#4447#0" expanded="true" />
-            <element signature="e#4496#4497#0" expanded="true" />
-            <element signature="e#4547#4548#0" expanded="true" />
-            <element signature="e#4583#4584#0" expanded="true" />
-            <element signature="e#4652#4653#0" expanded="true" />
-            <element signature="e#4702#4703#0" expanded="true" />
-            <element signature="e#4748#4749#0" expanded="true" />
-            <element signature="e#4779#4780#0" expanded="true" />
-            <element signature="e#4838#4839#0" expanded="true" />
-            <element signature="e#4878#4879#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/List.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
-          <folding>
-            <element signature="e#256#257#0" expanded="true" />
-            <element signature="e#281#282#0" expanded="true" />
-            <element signature="e#314#315#0" expanded="true" />
-            <element signature="e#342#343#0" expanded="true" />
-            <element signature="e#379#380#0" expanded="true" />
-            <element signature="e#412#413#0" expanded="true" />
-            <element signature="e#464#465#0" expanded="true" />
-            <element signature="e#508#509#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Meal.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="323">
@@ -582,20 +499,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheMealDBAPI.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/app/App.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="182">
-          <caret line="58" column="103" selection-start-line="58" selection-start-column="103" selection-end-line="58" selection-end-column="103" />
+        <state relative-caret-position="355">
+          <caret line="434" column="51" lean-forward="true" selection-start-line="434" selection-start-column="51" selection-end-line="434" selection-end-column="51" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/app/App.java">
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Category.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="26" column="23" lean-forward="true" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
+        <state relative-caret-position="238">
+          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/Drink.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="36" lean-forward="true" selection-start-line="36" selection-end-line="36" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/model/List.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
+          <folding>
+            <element signature="e#256#257#0" expanded="true" />
+            <element signature="e#281#282#0" expanded="true" />
+            <element signature="e#314#315#0" expanded="true" />
+            <element signature="e#342#343#0" expanded="true" />
+            <element signature="e#379#380#0" expanded="true" />
+            <element signature="e#412#413#0" expanded="true" />
+            <element signature="e#464#465#0" expanded="true" />
+            <element signature="e#508#509#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mashuprecipe.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="25" lean-forward="true" selection-start-line="44" selection-start-column="25" selection-end-line="44" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheCocktailDBAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="293">
+          <caret line="32" column="56" selection-start-line="32" selection-start-column="43" selection-end-line="32" selection-end-column="56" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/MySQLDatabase.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-238">
+          <caret line="14" column="29" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/ch/bbw/dn/mashuprecipe/data/TheMealDBAPI.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="44" lean-forward="true" selection-start-line="44" selection-end-line="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

@@ -14,8 +14,6 @@ public class MySQLDatabase {
 
     public MySQLDatabase() {}
 
-
-
     //---------------------------------------------
     //                 getList
     //---------------------------------------------
@@ -124,8 +122,7 @@ public class MySQLDatabase {
             st.executeUpdate();
 
         }
-        catch(Exception e)
-        {
+        catch(Exception e) {
             e.printStackTrace();
         }
 

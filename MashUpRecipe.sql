@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 02. Feb 2019 um 18:34
+-- Erstellungszeit: 02. Feb 2019 um 19:31
 -- Server-Version: 10.1.37-MariaDB
 -- PHP-Version: 7.3.0
 
@@ -52,7 +52,7 @@ ALTER TABLE `list`
 -- AUTO_INCREMENT für Tabelle `list`
 --
 ALTER TABLE `list`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

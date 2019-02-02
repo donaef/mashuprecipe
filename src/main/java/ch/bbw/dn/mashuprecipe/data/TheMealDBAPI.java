@@ -20,8 +20,6 @@ public class TheMealDBAPI {
 
     public TheMealDBAPI() {}
 
-
-
     //---------------------------------------------
     //               getCategories
     //---------------------------------------------
