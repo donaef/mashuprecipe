@@ -3,14 +3,13 @@ package ch.bbw.dn.mashuprecipe.model;
 /**
  * MashUpRecipe
  * @author  Dominik Näf
- * @version 19.01.2019
+ * @version 02.02.2019
  */
 public class Category {
 
     private String idCategory;
     private String strCategory;
     private String strCategoryThumb;
-    private String strCategoryDescription;
 
     public Category() {};
 
@@ -36,14 +35,6 @@ public class Category {
 
     public void setStrCategoryThumb(String strCategoryThumb) {
         this.strCategoryThumb = strCategoryThumb;
-    }
-
-    public String getStrCategoryDescription() {
-        return strCategoryDescription;
-    }
-
-    public void setStrCategoryDescription(String strCategoryDescription) {
-        this.strCategoryDescription = strCategoryDescription;
     }
 
 }

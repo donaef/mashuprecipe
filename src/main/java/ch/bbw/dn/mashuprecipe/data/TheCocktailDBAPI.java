@@ -14,11 +14,17 @@ import java.util.ArrayList;
 /**
  * MashUpRecipe
  * @author  Dominik Näf
- * @version 19.01.2019
+ * @version 02.02.2019
  */
 public class TheCocktailDBAPI {
 
     public TheCocktailDBAPI() {}
+
+
+
+    //---------------------------------------------
+    //                 getDrink
+    //---------------------------------------------
 
     public ArrayList<Drink> getRandomDrink(){
 
@@ -107,7 +113,7 @@ public class TheCocktailDBAPI {
             }
 
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
 
         return returnList;

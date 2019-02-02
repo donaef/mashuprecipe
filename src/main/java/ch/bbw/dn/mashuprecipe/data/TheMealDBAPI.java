@@ -14,11 +14,17 @@ import java.util.ArrayList;
 /**
  * MashUpRecipe
  * @author  Dominik Näf
- * @version 19.01.2019
+ * @version 02.02.2019
  */
 public class TheMealDBAPI {
 
     public TheMealDBAPI() {}
+
+
+
+    //---------------------------------------------
+    //               getCategories
+    //---------------------------------------------
 
     public ArrayList<Category> getAllCategories() {
 
@@ -51,18 +57,23 @@ public class TheMealDBAPI {
                 categoryTemp.setIdCategory(jsonCategoriesInstance.getString("idCategory"));
                 categoryTemp.setStrCategory(jsonCategoriesInstance.getString("strCategory"));
                 categoryTemp.setStrCategoryThumb(jsonCategoriesInstance.getString("strCategoryThumb"));
-                categoryTemp.setStrCategoryDescription(jsonCategoriesInstance.getString("strCategoryDescription"));
                 returnList.add(categoryTemp);
             }
 
 
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
 
         return returnList;
 
     }
+
+
+
+    //---------------------------------------------
+    //                 getMeals
+    //---------------------------------------------
 
     public ArrayList<Meal> getMealsFilteredByCategory(String categoryChoosen) {
 
@@ -70,7 +81,7 @@ public class TheMealDBAPI {
 
         try {
 
-            URL url = new URL("https://www.themealdb.com/api/json/v1/1/filter.php?c="+categoryChoosen);
+            URL url = new URL("https://www.themealdb.com/api/json/v1/1/filter.php?c=" + categoryChoosen);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
 
@@ -89,6 +100,7 @@ public class TheMealDBAPI {
 
             JSONObject mainJSONObject = new JSONObject(response.toString());
             JSONArray meals = mainJSONObject.getJSONArray("meals");
+            int counter = 0;
             for (int i = 0; i < meals.length(); i++) {
 
                 JSONObject jsonMealsInstance = meals.getJSONObject(i);
@@ -96,17 +108,27 @@ public class TheMealDBAPI {
                 mealTemp.setIdMeal(jsonMealsInstance.getString("idMeal"));
                 mealTemp.setStrMeal(jsonMealsInstance.getString("strMeal"));
                 mealTemp.setStrMealThumb(jsonMealsInstance.getString("strMealThumb"));
-                returnList.add(mealTemp);
+
+                if (counter < 17) {
+                    returnList.add(mealTemp);
+                }
+                counter ++;
 
             }
 
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
 
         return returnList;
 
     }
+
+
+
+    //---------------------------------------------
+    //                 getMeal
+    //---------------------------------------------
 
     public ArrayList<Meal> getMeal(String mealChoosen) {
 
@@ -195,7 +217,7 @@ public class TheMealDBAPI {
             }
 
         } catch (Exception e) {
-            // TODO: handle exception
+            e.printStackTrace();
         }
 
         return returnList;

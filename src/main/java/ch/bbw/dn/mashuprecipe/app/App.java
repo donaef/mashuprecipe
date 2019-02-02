@@ -14,33 +14,43 @@ import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.*;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-
 import java.util.ArrayList;
 
 /**
  * MashUpRecipe
  * @author  Dominik Näf
- * @version 19.01.2019
+ * @version 02.02.2019
  */
 public class App extends Application {
 
-    Stage window;
-    Scene sceneCategories, sceneCategoryResults, sceneMeal;
+    Stage mainWindow;
+    Scene sceneCategories;
     String categoryChoosen, mealChoosen;
     TheMealDBAPI theMealDBAPI;
+    TheCocktailDBAPI theCocktailDBAPI;
+    MySQLDatabase mySQLDatabase;
 
 	public static void main(String[] args) {
         launch(args);
     }
-    
-    public void start(final Stage primaryStage) {
 
-	    window = primaryStage;
+
+
+    //---------------------------------------------
+    //                  HOME
+    //---------------------------------------------
+
+    public void start(Stage primaryStage) {
+
+        mainWindow = primaryStage;
+        mainWindow.getIcons().add(new Image("https://www.themealdb.com/images/ingredients/Lime.png"));
+        mainWindow.setTitle("MashUpRecipe - Dominik Näf");
 
         Button btnList = new Button();
         btnList.setText("Shoppinglist");
@@ -48,63 +58,22 @@ public class App extends Application {
         btnList.setTranslateY(10);
         btnList.setPrefWidth(100);
         btnList.setOnAction(new EventHandler<ActionEvent>() {
-
             public void handle(ActionEvent event) {
-
-                Stage windowList = new Stage();
-                StackPane rootList = new StackPane();
-                rootList.setAlignment(Pos.TOP_CENTER);
-
-                MySQLDatabase mySQLDatabase = new MySQLDatabase();
-                ArrayList<List> incredients = mySQLDatabase.getList();
-
-                int cordinateIncredient = 10;
-                for (List incredient : incredients) {
-
-                    Label incredient1 = new Label();
-                    incredient1.setAlignment(Pos.CENTER);
-                    incredient1.setText(incredient.getIncredient());
-                    incredient1.setTranslateY(cordinateIncredient);
-                    incredient1.setTranslateX(-50);
-                    incredient1.setPrefWidth(150);
-                    incredient1.wrapTextProperty().setValue(true);
-
-                    Label measure1 = new Label();
-                    measure1.setAlignment(Pos.CENTER);
-                    measure1.setText(incredient.getMeasure());
-                    measure1.setTranslateY(cordinateIncredient);
-                    measure1.setTranslateX(50);
-                    measure1.setPrefWidth(150);
-                    measure1.wrapTextProperty().setValue(true);
-
-                    rootList.getChildren().addAll(incredient1, measure1);
-                    cordinateIncredient += 20;
-
-                }
-
-                windowList.setScene(new Scene(rootList, 400, 500));
-                windowList.show();
-
+                    showList();
             }
-
         });
 
-        //---------------------------------------------
-        //                  HOME
-        //---------------------------------------------
-
-        theMealDBAPI = new TheMealDBAPI();
-        StackPane root = new StackPane();
-        root.setAlignment(Pos.TOP_CENTER);
+        StackPane paneHome = new StackPane();
+        paneHome.setAlignment(Pos.TOP_CENTER);
 
         Label lblTitleCategories = new Label();
         lblTitleCategories.setText("Categories");
         lblTitleCategories.setTranslateY(10);
-        root.getChildren().addAll(lblTitleCategories, btnList);
 
-        ArrayList<Category> results = theMealDBAPI.getAllCategories();
-        int cordinateY = 40;
-        for (final Category category : results) {
+        theMealDBAPI = new TheMealDBAPI();
+        ArrayList<Category> resultsCategories = theMealDBAPI.getAllCategories();
+        int cordinateY = 50;
+        for (final Category category : resultsCategories) {
 
             Button btnCategory = new Button();
             btnCategory.setText(category.getStrCategory());
@@ -125,49 +94,36 @@ public class App extends Application {
             imgViewCategory.setFitHeight(50);
             imgViewCategory.setFitWidth(50);
 
-            root.getChildren().addAll(btnCategory, imgViewCategory);
+            paneHome.getChildren().addAll(btnCategory, imgViewCategory);
             cordinateY += 50;
 
         }
 
-        sceneCategories = new Scene(root, 800, 900);
+        paneHome.getChildren().addAll(lblTitleCategories, btnList);
 
-        window.setTitle("MashUpRecipe - Dominik Näf");
-        window.setScene(sceneCategories);
-        window.show();
+        sceneCategories = new Scene(paneHome, 800, 900);
+        mainWindow.setScene(sceneCategories);
+        mainWindow.show();
         
 	}
 
+
+
+    //---------------------------------------------
+    //              Category Results
+    //---------------------------------------------
+
     public void showCategoryResults() {
 
-        //---------------------------------------------
-        //          Category Results
-        //---------------------------------------------
-
-        StackPane rootCategoryResults = new StackPane();
-        rootCategoryResults.setAlignment(Pos.TOP_CENTER);
+        StackPane paneCategoryResults = new StackPane();
+        paneCategoryResults.setAlignment(Pos.TOP_CENTER);
 
         Label lblTitleCategories = new Label();
         lblTitleCategories.setText("Meals in Category");
         lblTitleCategories.setTranslateY(10);
 
-        Button btnCategories = new Button();
-        btnCategories.setText("<");
-        btnCategories.setTranslateX(-250);
-        btnCategories.setPrefWidth(50);
-        btnCategories.setOnAction(new EventHandler<ActionEvent>() {
-
-            public void handle(ActionEvent event) {
-
-                window.setScene(sceneCategories);
-
-            }
-
-        });
-        rootCategoryResults.getChildren().addAll(btnCategories, lblTitleCategories);
-
         ArrayList<Meal> resultsCategory = theMealDBAPI.getMealsFilteredByCategory(categoryChoosen);
-        int cordinateYCategory = 40;
+        int cordinateYCategory = 50;
         for (final Meal meal : resultsCategory) {
 
             Image imgMeal = new Image(meal.getStrMealThumb());
@@ -188,239 +144,312 @@ public class App extends Application {
                     showMeal();
                 }
             });
+
+            paneCategoryResults.getChildren().addAll(btnMeal, imgViewMeal);
             cordinateYCategory += 50;
-            rootCategoryResults.getChildren().addAll(btnMeal, imgViewMeal);
         }
 
-        sceneCategoryResults = new Scene(rootCategoryResults, 800, 900);
-        window.setScene(sceneCategoryResults);
+        paneCategoryResults.getChildren().addAll(btnBack(), lblTitleCategories);
+
+        Scene scene = new Scene(paneCategoryResults, 800, 900);
+        mainWindow.setScene(scene);
 
     }
 
+
+
+    //---------------------------------------------
+    //                    Meal
+    //---------------------------------------------
+
     public void showMeal() {
 
-        //---------------------------------------------
-        //                  Categories
-        //---------------------------------------------
-
-        StackPane rootMeal = new StackPane();
-        rootMeal.setAlignment(Pos.TOP_CENTER);
-
-        Button btnCategories = new Button();
-        btnCategories.setText("<");
-        btnCategories.setTranslateX(-250);
-        btnCategories.setPrefWidth(50);
-        btnCategories.setOnAction(new EventHandler<ActionEvent>() {
-
-            public void handle(ActionEvent event) {
-
-                window.setScene(sceneCategoryResults);
-
-            }
-
-        });
+        StackPane paneMeal = new StackPane();
+        paneMeal.setAlignment(Pos.TOP_CENTER);
 
         final ArrayList<Meal> resultsCategory = theMealDBAPI.getMeal(mealChoosen);
 
         Button btnYouTube = new Button();
         btnYouTube.setText("YouTube");
-        btnYouTube.setTranslateX(200);
+        btnYouTube.setTranslateX(250);
+        btnYouTube.setTranslateY(10);
         btnYouTube.setPrefWidth(100);
         btnYouTube.setOnAction(new EventHandler<ActionEvent>() {
-
             public void handle(ActionEvent event) {
-
-                Stage windowYouTube = new Stage();
-
-                WebView webView = new WebView();
-                webView.getEngine().load(resultsCategory.get(0).getStrYoutTube());
-                webView.setPrefSize(640, 390);
-
-                windowYouTube.setScene(new Scene(webView));
-                windowYouTube.show();
-
+                showVideo(resultsCategory);
             }
-
         });
 
         Button btnList = new Button();
-        btnList.setText("Incredients");
-        btnList.setTranslateX(200);
-        btnList.setTranslateY(35);
+        btnList.setText("Ingredients");
+        btnList.setTranslateX(250);
+        btnList.setTranslateY(45);
         btnList.setPrefWidth(100);
         btnList.setOnAction(new EventHandler<ActionEvent>() {
-
             public void handle(ActionEvent event) {
-
-                Stage windowIncredients = new Stage();
-                StackPane rootList = new StackPane();
-                rootList.setAlignment(Pos.TOP_CENTER);
-
-                final ArrayList<String> incredients = resultsCategory.get(0).getIntegredients();
-                final ArrayList<String> measures = resultsCategory.get(0).getMeasures();
-
-                Button btnShoppingList = new Button();
-                btnShoppingList.setText("Add to Shoppinglist");
-                btnShoppingList.setPrefWidth(150);
-                btnShoppingList.setOnAction(new EventHandler<ActionEvent>() {
-
-                    public void handle(ActionEvent event) {
-
-                        MySQLDatabase mySQLDatabase = new MySQLDatabase();
-                        mySQLDatabase.addList(incredients, measures);
-
-                    }
-
-                });
-                rootList.getChildren().add(btnShoppingList);
-
-                int cordinateIncredient = 40;
-                int cordinateMeasure = 40;
-                for (String incredient : incredients) {
-                    Label incredient1 = new Label();
-                    incredient1.setAlignment(Pos.CENTER);
-                    incredient1.setText(incredient);
-                    incredient1.setTranslateY(cordinateIncredient);
-                    incredient1.setTranslateX(-50);
-                    incredient1.setPrefWidth(150);
-                    incredient1.wrapTextProperty().setValue(true);
-                    cordinateIncredient += 20;
-                    rootList.getChildren().add(incredient1);
-                }
-
-                for (String measure : measures) {
-                    Label measure1 = new Label();
-                    measure1.setAlignment(Pos.CENTER);
-                    measure1.setText(measure);
-                    measure1.setTranslateY(cordinateMeasure);
-                    measure1.setTranslateX(50);
-                    measure1.setPrefWidth(150);
-                    measure1.wrapTextProperty().setValue(true);
-                    cordinateMeasure += 20;
-                    rootList.getChildren().add(measure1);
-                }
-
-                windowIncredients.setScene(new Scene(rootList, 400, 500));
-                windowIncredients.show();
-
+                showIngredients(resultsCategory, null);
             }
-
         });
-
-
 
         Button btnDrink = new Button();
         btnDrink.setText("Random Drink");
-        btnDrink.setTranslateX(200);
-        btnDrink.setTranslateY(70);
+        btnDrink.setTranslateX(250);
+        btnDrink.setTranslateY(80);
         btnDrink.setPrefWidth(100);
         btnDrink.setOnAction(new EventHandler<ActionEvent>() {
-
             public void handle(ActionEvent event) {
-
-                Stage windowDrink = new Stage();
-                StackPane rootDrink = new StackPane();
-                rootDrink.setAlignment(Pos.TOP_CENTER);
-
-                TheCocktailDBAPI drinkAPI = new TheCocktailDBAPI();
-                ArrayList<Drink> resultsDrink = drinkAPI.getRandomDrink();
-
-                Image img = new Image(resultsDrink.get(0).getStrDrinkThumb());
-                ImageView imgView = new ImageView(img);
-                imgView.setTranslateX(-100);
-                imgView.setTranslateY(30);
-                imgView.setFitHeight(50);
-                imgView.setFitWidth(50);
-
-                Label title = new Label();
-                title.setText(resultsDrink.get(0).getStrDrink());
-                title.setAlignment(Pos.CENTER);
-                title.setTranslateY(50);
-
-                Label introductions = new Label();
-                introductions.setText(resultsDrink.get(0).getStrInstructions());
-                introductions.setAlignment(Pos.CENTER);
-                introductions.setTranslateY(100);
-                introductions.setPrefWidth(300);
-                introductions.wrapTextProperty().setValue(true);
-
-                final ArrayList<String> incredients = resultsDrink.get(0).getIntegredients();
-                final ArrayList<String> measures = resultsDrink.get(0).getMeasures();
-
-                Button btnShoppingList = new Button();
-                btnShoppingList.setText("Add to Shoppinglist");
-                btnShoppingList.setPrefWidth(150);
-                btnShoppingList.setOnAction(new EventHandler<ActionEvent>() {
-
-                    public void handle(ActionEvent event) {
-
-                        MySQLDatabase mySQLDatabase = new MySQLDatabase();
-                        mySQLDatabase.addList(incredients, measures);
-
-                    }
-
-                });
-                rootDrink.getChildren().addAll(btnShoppingList, imgView, title, introductions);
-
-                int cordinateIncredient = 225;
-                int cordinateMeasure = 225;
-                for (String incredient : incredients) {
-                    Label incredient1 = new Label();
-                    incredient1.setAlignment(Pos.CENTER);
-                    incredient1.setText(incredient);
-                    incredient1.setTranslateY(cordinateIncredient);
-                    incredient1.setTranslateX(-50);
-                    incredient1.setPrefWidth(150);
-                    incredient1.wrapTextProperty().setValue(true);
-                    cordinateIncredient += 20;
-                    rootDrink.getChildren().add(incredient1);
-                }
-
-                for (String measure : measures) {
-                    Label measure1 = new Label();
-                    measure1.setAlignment(Pos.CENTER);
-                    measure1.setText(measure);
-                    measure1.setTranslateY(cordinateMeasure);
-                    measure1.setTranslateX(50);
-                    measure1.setPrefWidth(150);
-                    measure1.wrapTextProperty().setValue(true);
-                    cordinateMeasure += 20;
-                    rootDrink.getChildren().add(measure1);
-                }
-
-                windowDrink.setScene(new Scene(rootDrink, 400, 500));
-                windowDrink.show();
-
+                showDrink();
             }
-
         });
-
-        int cordinateYCategory = 40;
 
         Image img = new Image(resultsCategory.get(0).getStrMealThumb());
         ImageView imgView = new ImageView(img);
         imgView.setTranslateX(-250);
-        imgView.setTranslateY(cordinateYCategory-5);
+        imgView.setTranslateY(40);
         imgView.setFitHeight(50);
         imgView.setFitWidth(50);
 
-        Label title = new Label();
-        title.setText(resultsCategory.get(0).getStrMeal());
-        title.setAlignment(Pos.CENTER);
-        title.setTranslateY(cordinateYCategory);
-        cordinateYCategory += 100;
+        Label lblTitle = new Label();
+        lblTitle.setText(resultsCategory.get(0).getStrMeal());
+        lblTitle.setAlignment(Pos.CENTER);
+        lblTitle.setTranslateY(40);
 
-        Label introductions = new Label();
-        introductions.setText(resultsCategory.get(0).getStrInstructions());
-        introductions.setAlignment(Pos.CENTER);
-        introductions.setTranslateY(cordinateYCategory);
-        introductions.setPrefWidth(700);
-        introductions.wrapTextProperty().setValue(true);
+        Label lblIntruction = new Label();
+        lblIntruction.setText(resultsCategory.get(0).getStrInstructions());
+        lblIntruction.setAlignment(Pos.CENTER);
+        lblIntruction.setTranslateY(140);
+        lblIntruction.setPrefWidth(700);
+        lblIntruction.wrapTextProperty().setValue(true);
 
-        rootMeal.getChildren().addAll(title, introductions, imgView, btnList, btnYouTube, btnCategories, btnDrink);
+        paneMeal.getChildren().addAll(lblTitle, lblIntruction, imgView, btnList, btnYouTube, btnBack(), btnDrink);
+        mainWindow.setScene(new Scene(paneMeal, 800, 900));
 
-        sceneMeal = new Scene(rootMeal, 800, 900);
-        window.setScene(sceneMeal);
+    }
+
+
+
+    //---------------------------------------------
+    //                    List
+    //---------------------------------------------
+
+    public void showList() {
+
+        ScrollPane scrollPane = new ScrollPane();
+        VBox vbox = new VBox();
+        vbox.setAlignment(Pos.CENTER);
+
+        final Stage listStage = new Stage();
+        listStage.getIcons().add(new Image("https://www.themealdb.com/images/ingredients/Lime.png"));
+
+        mySQLDatabase = new MySQLDatabase();
+        ArrayList<List> resultIngredients = mySQLDatabase.getList();
+
+        Button btnDelete = new Button();
+        btnDelete.setText("Delete");
+        btnDelete.setPrefWidth(200);
+        btnDelete.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                mySQLDatabase.removeList();
+                listStage.close();
+            }
+        });
+        vbox.getChildren().add(btnDelete);
+
+        for (final List ingredient : resultIngredients) {
+
+            HBox hbox = new HBox();
+            hbox.setAlignment(Pos.CENTER);
+
+            Label lblIngredient = new Label();
+            lblIngredient.setAlignment(Pos.CENTER_LEFT);
+            lblIngredient.setText(ingredient.getIngredient() + " - ");
+            lblIngredient.wrapTextProperty().setValue(true);
+
+            Label lblMeasure = new Label();
+            lblMeasure.setAlignment(Pos.CENTER_RIGHT);
+            lblMeasure.setText(ingredient.getMeasure());
+            lblMeasure.wrapTextProperty().setValue(true);
+
+            hbox.getChildren().addAll(lblIngredient, lblMeasure);
+            vbox.getChildren().add(hbox);
+
+        }
+
+        scrollPane.setContent(vbox);
+
+        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.AS_NEEDED);
+
+        listStage.setScene(new Scene(scrollPane, 220, 500));
+        listStage.show();
+
+    }
+
+
+
+    //---------------------------------------------
+    //                    Drink
+    //---------------------------------------------
+
+    public void showDrink() {
+
+        Stage drinkStage = new Stage();
+        drinkStage.getIcons().add(new Image("https://www.themealdb.com/images/ingredients/Lime.png"));
+
+        StackPane drinkPane = new StackPane();
+        drinkPane.setAlignment(Pos.TOP_CENTER);
+
+        theCocktailDBAPI = new TheCocktailDBAPI();
+        final ArrayList<Drink> resultsDrink = theCocktailDBAPI.getRandomDrink();
+
+        Image img = new Image(resultsDrink.get(0).getStrDrinkThumb());
+        ImageView imgView = new ImageView(img);
+        imgView.setTranslateX(-100);
+        imgView.setTranslateY(45);
+        imgView.setFitHeight(50);
+        imgView.setFitWidth(50);
+
+        Label lblTitle = new Label();
+        lblTitle.setText(resultsDrink.get(0).getStrDrink());
+        lblTitle.setAlignment(Pos.CENTER);
+        lblTitle.setTranslateY(60);
+
+        Label lblInstruction = new Label();
+        lblInstruction.setText(resultsDrink.get(0).getStrInstructions());
+        lblInstruction.setAlignment(Pos.CENTER);
+        lblInstruction.setTranslateY(111);
+        lblInstruction.setPrefWidth(300);
+        lblInstruction.wrapTextProperty().setValue(true);
+
+        Button btnIngredient = new Button();
+        btnIngredient.setText("Ingredient");
+        btnIngredient.setPrefWidth(250);
+        btnIngredient.setTranslateY(10);
+        btnIngredient.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                showIngredients(null, resultsDrink);
+            }
+        });
+
+        drinkPane.getChildren().addAll(lblTitle, lblInstruction, imgView, btnIngredient);
+
+        drinkStage.setScene(new Scene(drinkPane, 400, 500));
+        drinkStage.show();
+
+    }
+
+
+
+    //---------------------------------------------
+    //                    Video
+    //---------------------------------------------
+
+    public void showVideo(ArrayList<Meal> results) {
+
+        Stage videoStage = new Stage();
+        videoStage.getIcons().add(new Image("https://www.themealdb.com/images/ingredients/Lime.png"));
+
+        WebView webView = new WebView();
+        webView.getEngine().load(results.get(0).getStrYoutTube());
+        webView.setPrefSize(640, 390);
+
+        videoStage.setScene(new Scene(webView));
+        videoStage.show();
+
+    }
+
+
+
+    //---------------------------------------------
+    //                 Ingredients
+    //---------------------------------------------
+
+    public void showIngredients(ArrayList<Meal> resultsMeal, ArrayList<Drink> resultsDrink){
+
+        final Stage windowIngredients = new Stage();
+        windowIngredients.getIcons().add(new Image("https://www.themealdb.com/images/ingredients/Lime.png"));
+
+        StackPane listPane = new StackPane();
+        listPane.setAlignment(Pos.TOP_CENTER);
+
+        final ArrayList<String> ingredients;
+        final ArrayList<String> measures;
+        if (resultsMeal == null) {
+            ingredients = resultsDrink.get(0).getIntegredients();
+            measures = resultsDrink.get(0).getMeasures();
+        } else {
+            ingredients = resultsMeal.get(0).getIntegredients();
+            measures = resultsMeal.get(0).getMeasures();
+        }
+
+        Button btnShoppingList = new Button();
+        btnShoppingList.setText("Add to Shoppinglist");
+        btnShoppingList.setPrefWidth(200);
+        btnShoppingList.setTranslateY(10);
+        btnShoppingList.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+
+                mySQLDatabase = new MySQLDatabase();
+                mySQLDatabase.addList(ingredients, measures);
+                windowIngredients.close();
+
+            }
+        });
+        listPane.getChildren().add(btnShoppingList);
+
+        int cordinateIngredient = 50;
+        for (String ingredient : ingredients) {
+            Label lblIngredient = new Label();
+            lblIngredient.setAlignment(Pos.CENTER);
+            lblIngredient.setText(ingredient);
+            lblIngredient.setTranslateY(cordinateIngredient);
+            lblIngredient.setTranslateX(-50);
+            lblIngredient.setPrefWidth(150);
+            lblIngredient.wrapTextProperty().setValue(true);
+
+            listPane.getChildren().add(lblIngredient);
+            cordinateIngredient += 20;
+        }
+
+        int cordinateMeasure = 50;
+        for (String measure : measures) {
+            Label measure1 = new Label();
+            measure1.setAlignment(Pos.CENTER);
+            measure1.setText(measure);
+            measure1.setTranslateY(cordinateMeasure);
+            measure1.setTranslateX(50);
+            measure1.setPrefWidth(150);
+            measure1.wrapTextProperty().setValue(true);
+
+            listPane.getChildren().add(measure1);
+            cordinateMeasure += 20;
+        }
+
+        windowIngredients.setScene(new Scene(listPane, 400, 500));
+        windowIngredients.show();
+
+    }
+
+
+
+    //---------------------------------------------
+    //                 Back
+    //---------------------------------------------
+
+    public Button btnBack(){
+
+        Button btnBack = new Button();
+        btnBack.setText("<");
+        btnBack.setTranslateY(10);
+        btnBack.setTranslateX(-250);
+        btnBack.setPrefWidth(50);
+        btnBack.setOnAction(new EventHandler<ActionEvent>() {
+            public void handle(ActionEvent event) {
+                mainWindow.setScene(sceneCategories);
+            }
+        });
+
+        return btnBack;
 
     }
 
